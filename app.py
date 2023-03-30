@@ -412,7 +412,7 @@ with col2:
 
 col1, col2 = st.columns(2, gap="medium")
 with col1:
-    st.header("Top 10 Customer")
+    st.header("Top 10 Customer List")
 
     def highlight_max(s):
         """
