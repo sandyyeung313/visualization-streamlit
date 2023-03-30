@@ -412,7 +412,7 @@ with col2:
 
 col1, col2 = st.columns(2, gap="medium")
 with col1:
-    st.header("TABLE 1")
+    st.header("Top 10 Customer")
 
     def highlight_max(s):
         """
@@ -517,12 +517,14 @@ with col2:
     fig.add_trace(go.Bar(y=df_negative['PRODUCTLINE'], x=-df_negative['Deviation'],
                          base=df_negative['Deviation'],
                          name='negative',
-                         orientation='h'
+                         orientation='h',
+                         # color_discrete_sequence=['green'] * len(df_negative)
                          ))
     fig.add_trace(go.Bar(y=df_positive['PRODUCTLINE'], x=df_positive['Deviation'],
                          base=0,
                          name='positive',
-                         orientation='h'
+                         orientation='h',
+                         # color_discrete_sequence=['blue'] * len(df_negative)
                          ))
     fig.update_layout(barmode='relative',
                       yaxis_autorange='reversed',
