@@ -460,28 +460,6 @@ with col1:
         .set_table_styles([{'selector': 'td', 'props': [('color', 'black')]}])
 
     st.dataframe(styled_top_10_customers, use_container_width=True)
-# with col2:
-#     st.header("Table 2")
-#     # Group the filtered data by product line and sum the sales and profit
-#     top_product_lines = filtered_df.groupby('PRODUCTLINE', as_index=False)[['SALES', 'PROFIT']].sum()
-#
-#     # Calculate the profit percentage
-#     top_product_lines['PROFIT_PERCENTAGE'] = (top_product_lines['PROFIT'] / top_product_lines['SALES']) * 100
-#
-#     # Sort the DataFrame by sales in descending order
-#     top_product_lines = top_product_lines.sort_values('SALES', ascending=False)
-#
-#     # Display the top 10 product lines
-#     top_10_product_lines = top_product_lines.head(10).set_index("PRODUCTLINE")
-#
-#     # Apply the highlighting function to the top 10 product lines DataFrame
-#     styled_top_10_product_lines = top_10_product_lines.style.apply(highlight_max,
-#                                                                    subset=['SALES', 'PROFIT_PERCENTAGE'])
-#
-#     st.dataframe(styled_top_10_product_lines)
-#
-#     #df_filtered = df[df['YEAR_ID'].isin([2003, 2004, 2005])]
-#     #sales_by_year = df_filtered.groupby('YEAR_ID')['SALES'].sum().reset_index()
 
 with col2:
     st.header("Deviation of Average Unit Price from Weighted Average MSRP")
@@ -531,19 +509,3 @@ with col2:
                       legend_orientation='h',
                       )
     st.plotly_chart(fig, use_container_width=True)
-    # st.table(df_unit)
-    # weighted_avg['Deviation'] = weighted_avg['Weighted_Avg_PRICEEACH'] - weighted_avg['Weighted_Avg_MSRP']
-    #
-    # # Create the box plot
-    # fig = go.Figure()
-    #
-    # for product_line in weighted_avg['PRODUCTLINE'].unique():
-    #     product_line_data = weighted_avg[weighted_avg['PRODUCTLINE'] == product_line]
-    #     fig.add_trace(go.Box(x=product_line_data['YEAR_ID'], y=product_line_data['Deviation'],
-    #                          name=f'{product_line}', marker_color='#7E909A'))
-    #
-    # fig.update_layout(title='Product Line Deviation from Weighted Average MSRP and PRICEEACH',
-    #                   xaxis_title='Year', yaxis_title='Deviation')
-    #
-    # # Show the plot in Streamlit
-    # st.plotly_chart(fig, use_container_width=True)
