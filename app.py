@@ -69,7 +69,7 @@ with col1:
 
         fig.update_layout(
             title=f'Sales Performance for {target_year} (YTD) ',
-            title_font=dict(size=24),
+            title_font=dict(size=30),
             autosize=True,
             annotations=[
                 go.layout.Annotation(
@@ -154,7 +154,7 @@ with col2:
 
         fig.update_layout(
             title=f'Sales Performance for {year} Q{quarter} (QTD)',
-            title_font=dict(size=24),
+            title_font=dict(size=30),
             annotations=[
                 go.layout.Annotation(
                     x=target / (target * 1.3),
@@ -211,7 +211,7 @@ with col3:
 
         fig.update_layout(
             title=f'Order Status Percentage for {year}',
-            title_font=dict(size=24),
+            title_font=dict(size=30),
             xaxis=dict(
                 title='Percentage',
                 titlefont=dict(size=15, color='black', family='Arial Bold'),  # Change the family to 'Arial Bold'
@@ -273,7 +273,7 @@ with col4:
 
         fig.update_layout(
             title=f'Deal Size Percentage for {year}',
-            title_font=dict(size=24),
+            title_font=dict(size=30),
             xaxis=dict(
                 title='Percentage',
                 titlefont=dict(size=15, color='black', family='Arial Bold'),  # Change the family to 'Arial Bold'
