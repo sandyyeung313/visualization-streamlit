@@ -419,7 +419,7 @@ def highlight_max(s, highlight_color='#F59E43'):
     return [f'background-color: {highlight_color}' if cell else '' for cell in is_max]
 
 with col1:
-    st.header("Top 10 Customers")
+    st.header("Top 10 Customer")
 
     # Get unique values for filters
     years = sorted(df['YEAR_ID'].unique())
