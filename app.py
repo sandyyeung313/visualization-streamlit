@@ -411,28 +411,27 @@ with col2:
 
 
 col1, col2 = st.columns(2, gap="medium")
+def highlight_max(s, highlight_color='#F59E43'):
+    """
+    Highlight the highest value in the series.
+    """
+    is_max = s == s.max()
+    return [f'background-color: {highlight_color}' if cell else '' for cell in is_max]
+
 with col1:
-    st.header("Top 10 Customer List")
+    st.header("Top 10 Customers")
 
-    def highlight_max(s):
-        """
-        Highlight the highest value in the series.
-        """
-        is_max = s == s.max()
-        return ['background-color: yellow' if cell else '' for cell in is_max]
-
-#
     # Get unique values for filters
     years = sorted(df['YEAR_ID'].unique())
-    quarters = sorted(df['QTR_ID'].unique())
+    productlines = sorted(df['PRODUCTLINE'].unique())
 
     selected_year = st.selectbox("Select Year", options=['Select All'] + years, key=123)
-    selected_quarters = st.selectbox("Select Product Line", options=['Select All'] + quarters, key=456)
+    selected_product_line = st.selectbox("Select Product Line", options=['Select All'] + productlines, key=456)
     true_mask = np.ones(df.shape[0], dtype=bool)
     filter_year = true_mask if selected_year == 'Select All' else df['YEAR_ID'] == selected_year
-    filter_quarter = true_mask if selected_quarters == 'Select All' else df['QTR_ID'] == selected_quarters
+    product_filtered = true_mask if selected_product_line == 'Select All' else df['PRODUCTLINE'] == selected_product_line
     # Filter the DataFrame based on the selected filters
-    filtered_df = df[filter_year & filter_quarter]
+    filtered_df = df[filter_year & product_filtered]
 
     # Group the filtered data by customer and sum the sales and profit
     top_customers = filtered_df.groupby('CUSTOMERNAME', as_index=False)[['SALES', 'PROFIT']].sum()
@@ -454,12 +453,13 @@ with col1:
     # Display the top 10 customers
     top_10_customers = top_customers.head(10).set_index("CUSTOMERNAME")
 
-    # Apply the highlighting function to the top 10 customers DataFrame
-    styled_top_10_customers = top_10_customers.style.apply(highlight_max, subset=['SALES', 'PROFIT_PERCENTAGE'])
+    # Apply the highlighting function and set the text color to black
+    styled_top_10_customers = top_10_customers.style \
+        .apply(highlight_max, subset=['SALES', 'PROFIT_PERCENTAGE']) \
+        .format({'SALES': '{:,.2f}', 'PROFIT': '{:,.2f}', 'PROFIT_PERCENTAGE': '{:.2f}%'}) \
+        .set_table_styles([{'selector': 'td', 'props': [('color', 'black')]}])
 
     st.dataframe(styled_top_10_customers, use_container_width=True)
-
-
 # with col2:
 #     st.header("Table 2")
 #     # Group the filtered data by product line and sum the sales and profit
