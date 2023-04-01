@@ -3,6 +3,19 @@ import streamlit as st
 import pandas as pd
 import plotly.graph_objs as go
 
+# Data preparation was done on Jupyter notebook.
+# Providing the code here for reference.
+# Add # to prevent changing the dataset
+# file_name = "sales_data_sample.csv"
+# df = pd.read_csv(file_name, encoding='ISO-8859-1')
+# # Generate the RANDOM column with random numbers between 0.75 and 0.85
+# df["RANDOM"] = np.random.uniform(0.75, 0.85, len(df))
+# # Calculate the COST and PROFIT columns
+# df["COST"] = df["SALES"] * df["RANDOM"]
+# df["PROFIT"] = df["SALES"] - df["COST"]
+# # df.to_csv(file_name, index=False)
+# # print(df.info())
+
 st.set_page_config(layout="wide")
 
 with open('style.css') as f:
