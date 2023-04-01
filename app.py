@@ -375,14 +375,14 @@ with col1:
 with col2:
     st.header("Total Sales and Profit by Product")
 
-    # Create filters for years and product lines
+
     unique_years = ['Select All'] + sorted(df['YEAR_ID'].unique().tolist())
     unique_product_lines = ['Select All'] + sorted(df['PRODUCTLINE'].unique().tolist())
 
     selected_year = st.selectbox("Select Year", options=unique_years)
     selected_product_line = st.selectbox("Select Product Line", options=unique_product_lines)
 
-    # Set the colors for each year
+
     year_colors = {unique_years[1]: 'rgba(126, 144, 154, 1)', unique_years[2]: 'rgba(165, 216, 221, 1)',
                    unique_years[3]: 'rgba(245, 158, 76, 1)'}
 
@@ -419,7 +419,7 @@ with col2:
 
     fig.update_layout( xaxis_title='Month', yaxis_title='Amount')
 
-    # Show the plot in Streamlit
+
     st.plotly_chart(fig, use_container_width=True)
 
 
@@ -434,7 +434,7 @@ def highlight_max(s, highlight_color='#F59E43'):
 with col1:
     st.header("Top 10 Customers")
 
-    # Get unique values for filters
+
     years = sorted(df['YEAR_ID'].unique())
     productlines = sorted(df['PRODUCTLINE'].unique())
 
@@ -443,7 +443,7 @@ with col1:
     true_mask = np.ones(df.shape[0], dtype=bool)
     filter_year = true_mask if selected_year == 'Select All' else df['YEAR_ID'] == selected_year
     product_filtered = true_mask if selected_product_line == 'Select All' else df['PRODUCTLINE'] == selected_product_line
-    # Filter the DataFrame based on the selected filters
+
     filtered_df = df[filter_year & product_filtered]
 
     # Group the filtered data by customer and sum the sales and profit
@@ -456,17 +456,16 @@ with col1:
     </style>
     """
 
-    # Apply the custom header style
+
     st.write(header_style, unsafe_allow_html=True)
     # Calculate the profit percentage
     top_customers['PROFIT_PERCENTAGE'] = ((top_customers['PROFIT'] / top_customers['SALES']) * 100).round(2)
 
-    # Sort the DataFrame by sales in descending order
     top_customers = top_customers.sort_values('SALES', ascending=False)
-    # Display the top 10 customers
+
     top_10_customers = top_customers.head(10).set_index("CUSTOMERNAME")
 
-    # Apply the highlighting function and set the text color to black
+
     styled_top_10_customers = top_10_customers.style \
         .apply(highlight_max, subset=['SALES', 'PROFIT_PERCENTAGE']) \
         .format({'SALES': '{:,.2f}', 'PROFIT': '{:,.2f}', 'PROFIT_PERCENTAGE': '{:.2f}%'}) \
