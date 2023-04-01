@@ -21,10 +21,8 @@ st.set_page_config(layout="wide")
 with open('style.css') as f:
     st.markdown(f'<style>{f.read()}</style>', unsafe_allow_html=True)
 
-# load dataframe
-df = pd.read_csv("sales_data_sample.csv")
 
-# Row A
+df = pd.read_csv("sales_data_sample.csv")
 col1, col2, col3, col4 = st.columns(4, gap="small")
 
 with col1:
